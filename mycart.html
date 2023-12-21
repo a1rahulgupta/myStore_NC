@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>My Store- E-commerce Portal</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+
+        <i class="bi bi-camera"></i>
+        <h1>My Store</h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown"><a href="#"><span>Category</span> <i
+                class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="mens.html">Mens Wear</a></li>
+              <li><a href="womens.html">Womens Wear</a></li>
+              <li><a href="kids.html">Kids</a></li>
+            </ul>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="mycart.html">Cart</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+
+    </div>
+  </header>
+
+  <main id="main" data-aos="fade" data-aos-delay="1500">
+
+
+    <div class="page-header d-flex align-items-center">
+      <div class="container position-relative">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2>Cart</h2>
+            <p>If you want to stay on top of the fashion trends, then you need to shop for the latest and trendiest wear
+              from an e-commerce site My Store. Check out the amazing collection of wear for men online and select the
+              ones that suit you the best. Browse through stylish women’s topwear that are offered by popular brands,
+              such as Only, Jockey, U&F, Darzi, Ann Springs, and more.</p>
+
+            <a class="cta-btn" href="mens.html">Category Available</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-header d-flex align-items-center">
+      <div class="container position-relative">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2 id="noItem"></h2>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <section id="gallery" class="gallery">
+      <div class="container-fluid" id="cartDiv">
+      </div>
+
+    </section>
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="section-header">
+          <h2>Total Price</h2>
+          <p id="total"></p>
+        </div>
+      </div>
+    </section>
+    <div class="page-header d-flex align-items-center">
+      <div class="container position-relative">
+        <div class="row d-flex justify-content-center">
+          <div id="checkOutBtn" class="col-lg-6 text-center">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>My Store</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="">My Store</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader">
+    <div class="line"></div>
+  </div>
+
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+  </script>
+  <script>
+    var full_name=localStorage.getItem("full_name")
+            if(!full_name){
+              alert("Unauthorized")
+              window.location.replace("/login.html")
+            }
+
+    var itemArr = JSON.parse(localStorage.getItem("itemArr"));
+    if (!itemArr) {
+      document.getElementById('noItem').innerHTML = "No Item Found";
+      document.getElementById('total').innerHTML = "0";
+    } else {
+      onLoadItem(itemArr);
+    }
+
+    function onLoadItem(itemValue) {
+      itemValue = JSON.parse(localStorage.getItem("itemArr"));
+      document.getElementById('checkOutBtn').innerHTML = `<a  class="cta-btn" onclick="checkOut(event)" href="javascript:;">Order Place</a>`;
+
+      var imagePath = "assets/img/gallery/"
+      var cartItem = "";
+      for (var i = 0; i < itemValue.length; i++) {
+        cartItem += ` <div class="row gy-2 justify-content-center">
+      <div class="col-lg-2">
+        <img src="assets/img/gallery/${itemValue[i].item}" class="img-fluid" alt="">
+      </div>
+      <div class="col-lg-5 content">
+        <h2>Product</h2>
+        <div class="row">
+          <div class="col-lg-6">
+         
+            <ul>
+              <span><i class="bi bi-tags"></i> ₹ ${itemValue[i].price}.00<br>
+              <a href="javascript:;" onclick="removeItem(event,'${itemValue[i].item}')"><i class="bi bi-trash"></i> Remove</a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>`
+      }
+      $("#cartDiv").append(cartItem);
+      var totalPrice = 0;
+      itemValue.forEach(function (value, index, arry) {
+        totalPrice += Number(value.price);
+      });
+      document.getElementById('total').innerHTML = "₹ " + totalPrice + ".00";
+    }
+
+
+    function checkOut(event) {
+      event.preventDefault()
+      localStorage.removeItem('itemArr');
+      window.alert("Order Placed Successfully")
+      window.location.replace("/index.html")
+    }
+
+    function removeItem(event, item) {
+      event.preventDefault();
+      console.log(event, item, itemArr)
+      var filtered = itemArr.filter(function (idx) { return idx.item != item; });
+      localStorage.removeItem('itemArr');
+      localStorage.setItem('itemArr', JSON.stringify(filtered));
+  
+       window.location.reload();
+    }
+    
+
+  </script>
+
+</body>
+
+</html>
